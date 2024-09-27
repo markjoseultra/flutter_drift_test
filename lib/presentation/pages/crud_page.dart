@@ -43,8 +43,6 @@ class _CrudPageState extends ConsumerState<CrudPage> {
               isSynced: false,
             ),
           );
-
-      getData();
     } catch (e) {
       showDialog(
           // ignore: use_build_context_synchronously
@@ -61,16 +59,12 @@ class _CrudPageState extends ConsumerState<CrudPage> {
   void deleteData({required int id}) async {
     final db = ref.read(dbProvider);
 
-    if (selectedItemId == null) return;
-
     ResponseInputTableData itemToDelete =
         await (db.select(db.responseInputTable)
               ..where((item) => item.id.equals(id)))
             .getSingle();
 
     db.delete(db.responseInputTable).delete(itemToDelete);
-
-    getData();
   }
 
   void getData() async {
@@ -103,8 +97,6 @@ class _CrudPageState extends ConsumerState<CrudPage> {
             .getSingle();
 
     db.update(db.responseInputTable).replace(itemToUpdate.copyWith(name: name));
-
-    getData();
   }
 
   void onTapAddData() {
@@ -145,9 +137,33 @@ class _CrudPageState extends ConsumerState<CrudPage> {
     });
   }
 
+  void startDbListen() {
+    final db = ref.read(dbProvider);
+
+    Stream<List<ResponseInputTableData>> dataStream =
+        db.select(db.responseInputTable).watch();
+
+    dataStream.listen((data) {
+      data.sort((a, b) =>
+          a.dateCreatedInMilliseconds < b.dateCreatedInMilliseconds ? 1 : 0);
+
+      setState(() {
+        renderData = data.map((e) {
+          return RenderItem(
+            id: e.id,
+            name: e.name,
+            dateCreated: DateTimeFormat.format(e.dateCreatedInDateTime,
+                format: "M d Y h:i s A"),
+          );
+        }).toList();
+      });
+    });
+  }
+
   @override
   void initState() {
     getData();
+    startDbListen();
     startPeriodicAddData();
     super.initState();
   }

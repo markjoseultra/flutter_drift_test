@@ -1,3 +1,4 @@
-# drift_test
+# DRIFT DATABASE TEST
 
-A new Flutter project.
+This project is created to explore drift a local SQL database for dart
+https://pub.dev/packages/drift

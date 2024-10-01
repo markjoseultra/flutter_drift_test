@@ -295,25 +295,6 @@ class ResponseInputTableData extends DataClass
         jsonData: jsonData ?? this.jsonData,
         isSynced: isSynced ?? this.isSynced,
       );
-  ResponseInputTableData copyWithCompanion(ResponseInputTableCompanion data) {
-    return ResponseInputTableData(
-      id: data.id.present ? data.id.value : this.id,
-      name: data.name.present ? data.name.value : this.name,
-      dateCreatedInMilliseconds: data.dateCreatedInMilliseconds.present
-          ? data.dateCreatedInMilliseconds.value
-          : this.dateCreatedInMilliseconds,
-      bigNumber: data.bigNumber.present ? data.bigNumber.value : this.bigNumber,
-      dateCreatedInDateTime: data.dateCreatedInDateTime.present
-          ? data.dateCreatedInDateTime.value
-          : this.dateCreatedInDateTime,
-      decimal: data.decimal.present ? data.decimal.value : this.decimal,
-      imageBytes:
-          data.imageBytes.present ? data.imageBytes.value : this.imageBytes,
-      jsonData: data.jsonData.present ? data.jsonData.value : this.jsonData,
-      isSynced: data.isSynced.present ? data.isSynced.value : this.isSynced,
-    );
-  }
-
   @override
   String toString() {
     return (StringBuffer('ResponseInputTableData(')
@@ -501,7 +482,7 @@ class ResponseInputTableCompanion
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
-  $AppDatabaseManager get managers => $AppDatabaseManager(this);
+  _$AppDatabaseManager get managers => _$AppDatabaseManager(this);
   late final $ResponseInputTableTable responseInputTable =
       $ResponseInputTableTable(this);
   @override
@@ -511,7 +492,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [responseInputTable];
 }
 
-typedef $$ResponseInputTableTableCreateCompanionBuilder
+typedef $$ResponseInputTableTableInsertCompanionBuilder
     = ResponseInputTableCompanion Function({
   Value<int> id,
   required String name,
@@ -535,6 +516,86 @@ typedef $$ResponseInputTableTableUpdateCompanionBuilder
   Value<String> jsonData,
   Value<bool> isSynced,
 });
+
+class $$ResponseInputTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $ResponseInputTableTable,
+    ResponseInputTableData,
+    $$ResponseInputTableTableFilterComposer,
+    $$ResponseInputTableTableOrderingComposer,
+    $$ResponseInputTableTableProcessedTableManager,
+    $$ResponseInputTableTableInsertCompanionBuilder,
+    $$ResponseInputTableTableUpdateCompanionBuilder> {
+  $$ResponseInputTableTableTableManager(
+      _$AppDatabase db, $ResponseInputTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$ResponseInputTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer: $$ResponseInputTableTableOrderingComposer(
+              ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              $$ResponseInputTableTableProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<int> dateCreatedInMilliseconds = const Value.absent(),
+            Value<BigInt> bigNumber = const Value.absent(),
+            Value<DateTime> dateCreatedInDateTime = const Value.absent(),
+            Value<double> decimal = const Value.absent(),
+            Value<Uint8List> imageBytes = const Value.absent(),
+            Value<String> jsonData = const Value.absent(),
+            Value<bool> isSynced = const Value.absent(),
+          }) =>
+              ResponseInputTableCompanion(
+            id: id,
+            name: name,
+            dateCreatedInMilliseconds: dateCreatedInMilliseconds,
+            bigNumber: bigNumber,
+            dateCreatedInDateTime: dateCreatedInDateTime,
+            decimal: decimal,
+            imageBytes: imageBytes,
+            jsonData: jsonData,
+            isSynced: isSynced,
+          ),
+          getInsertCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            required String name,
+            required int dateCreatedInMilliseconds,
+            required BigInt bigNumber,
+            required DateTime dateCreatedInDateTime,
+            required double decimal,
+            required Uint8List imageBytes,
+            required String jsonData,
+            required bool isSynced,
+          }) =>
+              ResponseInputTableCompanion.insert(
+            id: id,
+            name: name,
+            dateCreatedInMilliseconds: dateCreatedInMilliseconds,
+            bigNumber: bigNumber,
+            dateCreatedInDateTime: dateCreatedInDateTime,
+            decimal: decimal,
+            imageBytes: imageBytes,
+            jsonData: jsonData,
+            isSynced: isSynced,
+          ),
+        ));
+}
+
+class $$ResponseInputTableTableProcessedTableManager
+    extends ProcessedTableManager<
+        _$AppDatabase,
+        $ResponseInputTableTable,
+        ResponseInputTableData,
+        $$ResponseInputTableTableFilterComposer,
+        $$ResponseInputTableTableOrderingComposer,
+        $$ResponseInputTableTableProcessedTableManager,
+        $$ResponseInputTableTableInsertCompanionBuilder,
+        $$ResponseInputTableTableUpdateCompanionBuilder> {
+  $$ResponseInputTableTableProcessedTableManager(super.$state);
+}
 
 class $$ResponseInputTableTableFilterComposer
     extends FilterComposer<_$AppDatabase, $ResponseInputTableTable> {
@@ -636,100 +697,9 @@ class $$ResponseInputTableTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-class $$ResponseInputTableTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $ResponseInputTableTable,
-    ResponseInputTableData,
-    $$ResponseInputTableTableFilterComposer,
-    $$ResponseInputTableTableOrderingComposer,
-    $$ResponseInputTableTableCreateCompanionBuilder,
-    $$ResponseInputTableTableUpdateCompanionBuilder,
-    (
-      ResponseInputTableData,
-      BaseReferences<_$AppDatabase, $ResponseInputTableTable,
-          ResponseInputTableData>
-    ),
-    ResponseInputTableData,
-    PrefetchHooks Function()> {
-  $$ResponseInputTableTableTableManager(
-      _$AppDatabase db, $ResponseInputTableTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$ResponseInputTableTableFilterComposer(ComposerState(db, table)),
-          orderingComposer: $$ResponseInputTableTableOrderingComposer(
-              ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<int> dateCreatedInMilliseconds = const Value.absent(),
-            Value<BigInt> bigNumber = const Value.absent(),
-            Value<DateTime> dateCreatedInDateTime = const Value.absent(),
-            Value<double> decimal = const Value.absent(),
-            Value<Uint8List> imageBytes = const Value.absent(),
-            Value<String> jsonData = const Value.absent(),
-            Value<bool> isSynced = const Value.absent(),
-          }) =>
-              ResponseInputTableCompanion(
-            id: id,
-            name: name,
-            dateCreatedInMilliseconds: dateCreatedInMilliseconds,
-            bigNumber: bigNumber,
-            dateCreatedInDateTime: dateCreatedInDateTime,
-            decimal: decimal,
-            imageBytes: imageBytes,
-            jsonData: jsonData,
-            isSynced: isSynced,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required String name,
-            required int dateCreatedInMilliseconds,
-            required BigInt bigNumber,
-            required DateTime dateCreatedInDateTime,
-            required double decimal,
-            required Uint8List imageBytes,
-            required String jsonData,
-            required bool isSynced,
-          }) =>
-              ResponseInputTableCompanion.insert(
-            id: id,
-            name: name,
-            dateCreatedInMilliseconds: dateCreatedInMilliseconds,
-            bigNumber: bigNumber,
-            dateCreatedInDateTime: dateCreatedInDateTime,
-            decimal: decimal,
-            imageBytes: imageBytes,
-            jsonData: jsonData,
-            isSynced: isSynced,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: null,
-        ));
-}
-
-typedef $$ResponseInputTableTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $ResponseInputTableTable,
-    ResponseInputTableData,
-    $$ResponseInputTableTableFilterComposer,
-    $$ResponseInputTableTableOrderingComposer,
-    $$ResponseInputTableTableCreateCompanionBuilder,
-    $$ResponseInputTableTableUpdateCompanionBuilder,
-    (
-      ResponseInputTableData,
-      BaseReferences<_$AppDatabase, $ResponseInputTableTable,
-          ResponseInputTableData>
-    ),
-    ResponseInputTableData,
-    PrefetchHooks Function()>;
-
-class $AppDatabaseManager {
+class _$AppDatabaseManager {
   final _$AppDatabase _db;
-  $AppDatabaseManager(this._db);
+  _$AppDatabaseManager(this._db);
   $$ResponseInputTableTableTableManager get responseInputTable =>
       $$ResponseInputTableTableTableManager(_db, _db.responseInputTable);
 }

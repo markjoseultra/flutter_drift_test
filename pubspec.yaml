@@ -9,8 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  drift: ^2.20.2
-  drift_flutter: ^0.1.0
+  drift: ^2.18.0
+  drift_flutter: ^0.2.0
+  amplify_storage_s3: ^2.4.1
   riverpod: ^2.5.1
   flutter_riverpod: ^2.5.1
   date_time_format: ^2.0.1
@@ -19,7 +20,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  drift_dev: ^2.20.3
+  drift_dev: ^2.18.0
   build_runner: ^2.4.12
 
 flutter:
